@@ -1,6 +1,7 @@
 import requests
 from os import environ
 from datetime import datetime
+from progress.bar import Bar
 
 key = environ["STEAM_API_KEY"]
 steamid = environ["STEAM_ID"]
@@ -11,6 +12,7 @@ games = r.json()["response"]["games"]
 games_played = [game for game in games if game["playtime_forever"] > 0]
 releaseyears = []
 
+bar = Bar('Getting Release Dates', max=games_played.__len__())
 for game in games_played:
     appid = game["appid"]
 
@@ -22,4 +24,7 @@ for game in games_played:
         releaseyears.append(release_year)
     except:
         print("error with appid " + str(appid))
+
+    bar.next()
+bar.finish()
 
