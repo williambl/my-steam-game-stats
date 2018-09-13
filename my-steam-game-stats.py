@@ -1,8 +1,9 @@
 import requests
+from os import environ
 from datetime import datetime
 
-key = ""
-steamid = ""
+key = environ["STEAM_API_KEY"]
+steamid = environ["STEAM_ID"]
 
 r = requests.get(f"http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key={key}&steamid={steamid}&format=json")
 
