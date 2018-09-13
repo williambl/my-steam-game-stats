@@ -2,6 +2,7 @@ import requests
 from os import environ
 from datetime import datetime
 from progress.bar import Bar
+import collections
 
 key = environ["STEAM_API_KEY"]
 steamid = environ["STEAM_ID"]
@@ -28,3 +29,5 @@ for game in games_played:
     bar.next()
 bar.finish()
 
+year_frequencies = collections.Counter(releaseyears)
+print(year_frequencies)
