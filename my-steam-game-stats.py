@@ -3,6 +3,7 @@ from os import environ
 from datetime import datetime
 from progress.bar import Bar
 import collections
+from matplotlib import pyplot
 
 key = environ["STEAM_API_KEY"]
 steamid = environ["STEAM_ID"]
@@ -31,3 +32,7 @@ bar.finish()
 
 year_frequencies = collections.Counter(releaseyears)
 print(year_frequencies)
+
+pyplot.bar(year_frequencies.keys(), year_frequencies.values())
+pyplot.savefig("my-steam-game-stats.svg")
+pyplot.show()
