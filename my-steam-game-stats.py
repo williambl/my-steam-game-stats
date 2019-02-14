@@ -27,7 +27,7 @@ for game in games_played:
         releaseyears.append(release_year)
     except:
         print("error with appid " + str(appid) + " release date")
-        
+
     try:
         publisher = r.json()[str(appid)]["data"]["publishers"][0]
         publishers.append(publisher)
@@ -42,6 +42,16 @@ year_frequencies = collections.Counter(releaseyears)
 print(year_frequencies)
 
 publisher_frequencies = collections.Counter(publishers)
+other = 0
+others = []
+for pub, val in publisher_frequencies.items():
+    if (val == 1):
+        others.append(pub)
+        other += 1
+if (other > 0):
+    for pub in others:
+        del publisher_frequencies[pub]
+    publisher_frequencies["Other"] = other
 print(publisher_frequencies)
 
 pyplot.figure(1)
